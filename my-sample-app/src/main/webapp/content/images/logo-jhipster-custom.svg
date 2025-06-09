@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Custom JHipster mascot with light skin and a traditional Filipino salakot hat.
+  You can further edit this SVG for more detail or realism.
+-->
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Salakot hat -->
+  <ellipse cx="40" cy="18" rx="28" ry="10" fill="#bfa76f" stroke="#8c6e2f" stroke-width="2"/>
+  <ellipse cx="40" cy="18" rx="20" ry="6" fill="#ffe4b5" opacity="0.7"/>
+  <!-- Face -->
+  <ellipse cx="40" cy="38" rx="18" ry="20" fill="#fbe8d3" stroke="#bfa76f" stroke-width="2"/>
+  <!-- Glasses -->
+  <ellipse cx="30" cy="38" rx="5" ry="5" fill="#fff" stroke="#222" stroke-width="2"/>
+  <ellipse cx="50" cy="38" rx="5" ry="5" fill="#fff" stroke="#222" stroke-width="2"/>
+  <rect x="35" y="37" width="10" height="2" fill="#222"/>
+  <!-- Eyes -->
+  <circle cx="30" cy="38" r="2" fill="#222"/>
+  <circle cx="50" cy="38" r="2" fill="#222"/>
+  <!-- Mustache -->
+  <path d="M32 48 Q40 52 48 48" stroke="#8c6e2f" stroke-width="2" fill="none"/>
+  <!-- Smile -->
+  <path d="M35 52 Q40 56 45 52" stroke="#c96" stroke-width="2" fill="none"/>
+  <!-- Body (simple) -->
+  <rect x="28" y="58" width="24" height="14" rx="6" fill="#428bca"/>
+</svg>
