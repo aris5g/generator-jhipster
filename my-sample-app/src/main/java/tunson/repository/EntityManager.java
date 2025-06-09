@@ -61,6 +61,7 @@ public class EntityManager {
         this.sqlRenderer = sqlRenderer;
         this.updateMapper = updateMapper;
         this.r2dbcEntityTemplate = r2dbcEntityTemplate;
+        // TODO: getStatementMapper() is deprecated in recent Spring Data R2DBC. No direct replacement as of 2025. See migration guide.
         this.statementMapper = r2dbcEntityTemplate.getDataAccessStrategy().getStatementMapper();
     }
 
@@ -176,14 +177,16 @@ public class EntityManager {
     public Mono<Long> updateLinkTable(LinkTable table, Object entityId, Stream<?> referencedIds) {
         return deleteFromLinkTable(table, entityId).then(
             Flux.fromStream(referencedIds)
-                .flatMap((Object referenceId) -> {
+                .flatMap(referenceId -> {
+                    // TODO: getStatementMapper() and Parameter.from() are deprecated. No direct replacement as of Spring Data R2DBC 2025.
                     StatementMapper.InsertSpec insert = r2dbcEntityTemplate
                         .getDataAccessStrategy()
-                        .getStatementMapper()
+                        .getStatementMapper() // Deprecated
                         .createInsert(table.tableName)
-                        .withColumn(table.idColumn, Parameter.from(entityId))
-                        .withColumn(table.referenceColumn, Parameter.from(referenceId));
+                        .withColumn(table.idColumn, Parameter.from(entityId)) // Deprecated
+                        .withColumn(table.referenceColumn, Parameter.from(referenceId)); // Deprecated
 
+                    // The lambda returns Mono<Integer> (rows updated), which is a valid Publisher type for flatMap.
                     return r2dbcEntityTemplate.getDatabaseClient().sql(statementMapper.getMappedObject(insert)).fetch().rowsUpdated();
                 })
                 .collectList()
@@ -193,6 +196,7 @@ public class EntityManager {
 
     public Mono<Void> deleteFromLinkTable(LinkTable table, Object entityId) {
         Assert.notNull(entityId, "entityId is null");
+        // TODO: getStatementMapper() is deprecated. No direct replacement as of Spring Data R2DBC 2025. See migration guide.
         StatementMapper.DeleteSpec deleteSpec = r2dbcEntityTemplate
             .getDataAccessStrategy()
             .getStatementMapper()
